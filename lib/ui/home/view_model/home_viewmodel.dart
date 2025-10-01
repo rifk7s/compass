@@ -6,7 +6,7 @@ import 'package:logging/logging.dart';
 import '../../../data/repositories/booking/booking_repository.dart';
 import '../../../data/repositories/user/user_repository.dart';
 import '../../../domain/models/booking/booking_summary.dart';
-import '../../../domain/models/user/user.dart';
+import '../../../domain/models/user.dart';
 import '../../../utils/command.dart';
 import '../../../utils/result.dart';
 
