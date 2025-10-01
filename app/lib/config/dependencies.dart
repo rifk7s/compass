@@ -54,12 +54,8 @@ List<SingleChildWidget> _sharedProviders = [
 /// This dependency list uses repositories that connect to a remote server.
 List<SingleChildWidget> get providersRemote {
   return [
-    Provider(create: (context) => AuthApiClient(
-      host: _getServerHost(),
-    )),
-    Provider(create: (context) => ApiClient(
-      host: _getServerHost(),
-    )),
+    Provider(create: (context) => AuthApiClient(host: _getServerHost())),
+    Provider(create: (context) => ApiClient(host: _getServerHost())),
     Provider(create: (context) => SharedPreferencesService()),
     ChangeNotifierProvider(
       create: (context) =>
