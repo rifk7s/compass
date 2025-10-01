@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import 'dart:io';
+
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
@@ -52,8 +54,8 @@ List<SingleChildWidget> _sharedProviders = [
 /// This dependency list uses repositories that connect to a remote server.
 List<SingleChildWidget> get providersRemote {
   return [
-    Provider(create: (context) => AuthApiClient()),
-    Provider(create: (context) => ApiClient()),
+    Provider(create: (context) => AuthApiClient(host: _getServerHost())),
+    Provider(create: (context) => ApiClient(host: _getServerHost())),
     Provider(create: (context) => SharedPreferencesService()),
     ChangeNotifierProvider(
       create: (context) =>
@@ -132,4 +134,14 @@ List<SingleChildWidget> get providersLocal {
     ),
     ..._sharedProviders,
   ];
+}
+
+/// Get the appropriate server host based on the platform.
+/// Android emulators cannot access localhost directly,
+/// so we use the special IP 10.0.2.2 to access the host machine.
+String _getServerHost() {
+  if (Platform.isAndroid) {
+    return '10.0.2.2';
+  }
+  return 'localhost';
 }
